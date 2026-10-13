@@ -7,7 +7,9 @@ from pathlib import Path
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 # File paths
-BASE_DIR = Path(r"C:\Users\shrus\Downloads")
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
 MODEL_PATH = BASE_DIR / "rnn_model.keras"
 TOKENIZER_PATH = BASE_DIR / "tokenizer.pkl"
 
