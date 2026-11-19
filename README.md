@@ -1,133 +1,153 @@
 # Fake Job Posting Detection Using RNN
 
-## 📌 Project Overview
+A Natural Language Processing and Deep Learning project that analyzes job posting text and classifies advertisements as **Genuine** or **Fraudulent** using a Recurrent Neural Network (RNN).
 
-This project uses Deep Learning and Natural Language Processing (NLP) to analyze job posting text and predict its category using a Recurrent Neural Network (RNN).
+## Project Overview
 
-The goal is to help identify potentially fraudulent job advertisements and support safer job searching.
+Online job platforms can contain misleading or fraudulent job advertisements. This project explores how Natural Language Processing (NLP) and deep learning can help identify potentially fraudulent postings by analyzing their textual content.
 
-## 🎯 Objectives
+The project includes a trained RNN model and an interactive Streamlit application where users can enter a job description and view its predicted class.
+
+## Objectives
 
 - Analyze job descriptions using NLP techniques.
-- Preprocess text data for deep learning.
-- Train an RNN model to classify job postings.
-- Predict the class of a job posting entered by a user.
-- Build an interactive web application using Streamlit.
+- Clean and preprocess textual data.
+- Convert text into numerical sequences using tokenization.
+- Train an RNN model for binary text classification.
+- Predict whether a job posting is genuine or fraudulent.
+- Build an interactive application using Streamlit.
 
-## 🛠️ Technologies Used
+## Technologies Used
 
-- **Python** — Programming language
-- **Pandas & NumPy** — Data manipulation
-- **TensorFlow / Keras** — Deep learning model
-- **NLP** — Text preprocessing and tokenization
-- **Scikit-learn** — Data preparation and model evaluation
-- **Streamlit** — Interactive web application
-- **Jupyter Notebook** — Model development and experimentation
+| Technology | Purpose |
+|---|---|
+| Python | Programming |
+| Pandas & NumPy | Data handling |
+| TensorFlow / Keras | Deep learning |
+| NLP | Text preprocessing |
+| Scikit-learn | Data preparation and evaluation |
+| Streamlit | Interactive application |
+| Jupyter Notebook | Model development |
 
-## 📂 Project Structure
+## Dataset Overview
 
-```text
-Fake-Job-Posting-Detection/
-│
-├── RNN.ipynb
-├── fake_job_postings.csv
-├── fake_app.py
-├── rnn_model.keras
-├── tokenizer.pkl
-├── README.md
-└── requirements.txt
-```
+The dataset contains **17,880 job postings**.
 
-*Note: Update the filenames and dataset extension to match your actual files.*
+| Class | Number of records |
+|---|---:|
+| Genuine postings | 17,014 |
+| Fraudulent postings | 866 |
+| Total | 17,880 |
 
-## ⚙️ How It Works
+The dataset is imbalanced, with substantially fewer fraudulent postings than genuine ones. This is an important consideration when evaluating the model.
 
-1. **Data Collection:** Load a dataset containing job posting information and labels.
-2. **Data Preprocessing:** Clean and prepare the job description text.
-3. **Tokenization:** Convert words into numerical sequences.
-4. **Padding:** Standardize input sequences to a fixed length of 50 tokens.
-5. **Model Training:** Train an RNN-based neural network using an embedding layer, SimpleRNN layer, dropout, and dense layers.
-6. **Prediction:** Process user-entered job descriptions and predict the output class.
-7. **Deployment:** Use Streamlit to provide a simple interface for testing job postings.
+## Model Development
 
-## 🧠 Model Architecture
+The project follows these steps:
 
-The trained neural network contains:
+1. **Data Preparation:** Load and inspect the job posting dataset.
+2. **Text Preprocessing:** Clean and prepare the job description text.
+3. **Tokenization:** Convert text into numerical sequences.
+4. **Padding:** Standardize the input sequences to a length of 300 tokens.
+5. **Model Training:** Train an RNN-based deep learning model.
+6. **Prediction:** Classify job descriptions into genuine or fraudulent categories.
+7. **Application:** Use Streamlit to provide an interactive prediction interface.
+
+## Model Architecture
+
+The RNN model uses the following layers:
 
 - Embedding Layer
 - SimpleRNN Layer
 - Dropout Layer
 - Dense Layer with ReLU activation
-- Output Dense Layer with 5 classes
+- Output Layer for binary classification
 
-The model learns patterns in job posting text to predict one of five output classes. The meaning of each class depends on the original dataset labels and must be mapped accordingly.
+## Model Performance
 
-## 🚀 Run the Project Locally
+The best recorded model accuracy during development was **95.16%**.
+
+**Evaluation note:** Accuracy alone is not sufficient to establish fraud-detection performance, particularly because the dataset is imbalanced. Class-wise precision, recall, F1-score and a confusion matrix should also be evaluated before drawing conclusions about the model's ability to detect fraudulent postings.
+
+## Project Structure
+
+```text
+Fake-Job-Posting/
+│
+├── RNN.ipynb
+├── fake_app.py
+├── rnn_model.keras
+├── tokenizer.pkl
+├── requirements.txt
+└── README.md
+```
+
+## Run the Project Locally
 
 ### 1. Clone the repository
 
 ```bash
-git clone <your-github-repository-url>
-cd Fake-Job-Posting-Detection
+git clone https://github.com/shrushti5134-source/Fake-Job-Posting.git
+cd Fake-Job-Posting
 ```
 
-### 2. Install dependencies
+### 2. Create a virtual environment (optional)
+
+```bash
+python -m venv venv
+```
+
+Activate it on Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+### 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Launch the Streamlit application
+### 4. Run the Streamlit application
 
 ```bash
 streamlit run fake_app.py
 ```
 
-### 4. Test a job posting
+### 5. Make a prediction
 
-- Open the local Streamlit URL displayed in your terminal.
-- Paste a job description into the text area.
-- Click **Analyze Job Posting**.
-- Review the predicted class and model score.
+- Open the local URL displayed in the terminal.
+- Enter or paste a job description.
+- Submit it for analysis.
+- View the predicted classification.
 
-## 📊 Model Evaluation
+## Future Improvements
 
-The model should be evaluated using appropriate classification metrics, including:
-
-- Accuracy
-- Precision
-- Recall
-- F1-score
-- Confusion Matrix
-
-For fraud detection, recall for the fraudulent class is especially important because missed fraudulent postings can expose job seekers to risk.
-
-*Add your actual evaluation results here after testing the model.*
-
-## 💡 Future Improvements
-
-- Improve text preprocessing and feature selection.
+- Evaluate the model using precision, recall and F1-score.
+- Analyze the confusion matrix and fraudulent-class recall.
+- Explore class-imbalance handling techniques.
 - Compare RNN performance with LSTM and GRU models.
-- Add a clear mapping from predicted class indices to original labels.
-- Display class-specific confidence scores.
-- Evaluate performance on unseen job postings.
-- Deploy the Streamlit application online.
+- Improve text preprocessing and feature engineering.
+- Deploy the application online.
 
-## ⚠️ Limitations
+## Limitations
 
-- Predictions depend on the training dataset and model performance.
-- A prediction is not proof that a job posting is genuine or fraudulent.
-- Unseen wording, new scam techniques, and dataset bias may affect results.
-- The model's output classes must be interpreted using the original label mapping.
+- Predictions depend on the quality and coverage of the training dataset.
+- Dataset imbalance can affect the model's ability to detect fraudulent postings.
+- New fraud patterns and unfamiliar wording may affect predictions.
+- A model prediction does not guarantee that a job posting is genuine or fraudulent.
 
-Always verify job offers through official company websites, and never pay upfront fees to secure employment.
+Always verify job offers through official company websites and avoid paying upfront fees to secure employment.
 
-## 👩‍💻 Author
+## Author
 
 **Shrushti Shelgave**
 
 Computer Science Graduate | Aspiring Data Analyst | Machine Learning Enthusiast
 
-## 📄 License
+[GitHub](https://github.com/shrushti5134-source) · [LinkedIn](https://www.linkedin.com/in/shrushti-shelgave-0287a234a/)
 
-This project is intended for educational and portfolio purposes. Add an appropriate license if you plan to distribute the code publicly.
+---
+
+*This project was developed for educational and portfolio purposes.*
