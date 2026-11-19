@@ -140,6 +140,10 @@ streamlit run fake_app.py
 
 Always verify job offers through official company websites and avoid paying upfront fees to secure employment.
 
+## 🚀 Live Demo
+
+Try the application here: [Fake Job Posting Detection – Live App](https://fake-job-posting-hswndkqvyksmsdt9bfzjyq.streamlit.app/)
+
 ## Author
 
 **Shrushti Shelgave**
